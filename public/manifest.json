@@ -1,0 +1,12 @@
+{
+    "manifest": 3,
+    "name": "Web QR Scanner",
+    "version": "1.0",
+    "description": "A functional Scanner for QR Codes scattered across the web.",
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": "public/vite.svg"
+    },
+    "permissions": ["activeTab"],
+    "host_permissions": ["<all_urls>"]
+}

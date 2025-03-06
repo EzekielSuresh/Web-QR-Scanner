@@ -12,10 +12,16 @@ export default defineConfig({
     outDir: 'dist',
     rollupOptions: {
       input: {
-        popup: 'index.html'
+        popup: 'index.html',
+        background: "src/background.js",
+        content: "src/content.js"
+      },
+      output: {
+        entryFileNames: "[name].js" // Keeps "background.js" and "content.js"
       }
     }
   },
+  publicDir: "public",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

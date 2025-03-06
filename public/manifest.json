@@ -5,15 +5,16 @@
     "description": "A functional scanner for QR Codes scattered across the Web.",
     "action": {
         "default_popup": "index.html",
-        "default_icon": "public/scan-qr-code.svg"
+        "default_icon": "scan-qr-code.svg"
     },
     "permissions": ["tabs","activeTab", "storage", "scripting"],
     "background": {
-        "service_worker": "src/background.js"
+        "service_worker": "background.js",
+        "type": "module"
     },
     "host_permissions": ["<all_urls>"],
     "content_scripts": [{
         "matches": ["<all_urls>"],
-        "js": ["src/content.js"]
+        "js": ["content.js"]
     }]
 }

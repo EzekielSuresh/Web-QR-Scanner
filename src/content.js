@@ -1,28 +1,52 @@
-import jsQR from "jsqr"
+async function fetchQRImage() { 
+    try{
+        const data = await new Promise((resolve, reject) => {
+            chrome.storage.local.get(["qrScreenshot"], (data) => {
+                if (chrome.runtime.lastError) {
+                    reject(chrome.runtime.lastError)
+                } else {
+                    resolve(data)
+                }   
+            }) 
+        
+        })
 
-chrome.storage.local.get(["qrScreenshot"]).then((data) => {
+        if (!data.qrScreenshot) {
+            console.log("No QR screenshot found.")
+            return
+        }
 
-    if (!data.qrScreenshot) {
-        return
-    }
+        processQRCode(data.qrScreenshot)
 
+    } catch (error) {
+        console.error("Error fetching data: ", error)
+    }  
+}
+
+
+function processQRCode(imageSrc) {
     const img = new Image()
-    img.src = data.qrScreenshot
+    img.src = imageSrc
 
-    img.onload = () => {
-
+    img.onload = async () => {
         const canvas = document.createElement("canvas")
         const ctx = canvas.getContext("2d", { alpha: false })
 
-        canvas.width = img,width
+        canvas.width = img.width
         canvas.height = img.height
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-        const qrCode = jsQR(imageData.data, imageData.width, imageData.height)
- 
-        const result = qrCode ? qrCode.data : "No QR Code found."
-        
-        chrome.runtime.sendMessage({action: "qr_result", result})
+
+        await chrome.storage.local.set({ 
+            qrImageData: Array.from(imageData.data),
+            qrImageWidth: imageData.width,
+            qrImageHeight: imageData.height
+        })
+
+        chrome.runtime.sendMessage({action: "decode_qr"})
+
     }
-})
+}
+
+fetchQRImage()

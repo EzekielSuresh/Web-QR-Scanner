@@ -12,59 +12,35 @@ function Popup() {
 
     const handleClick = () => {
         chrome.runtime.sendMessage({ action: "capture_screen"}, (response) => {
-            if (chrome.runtime.lastError || !response ) {
+            if (!response || response.result != "success") {
                 setError("Failed to capture screen.")
                 return
             }
-        })
-    } 
 
-    useEffect(() => {
-        const handleMessage = async (message) => {
-            if (message.action == "decode_qr"){
-                try {
-                    const { qrImageData, qrImageWidth, qrImageHeight } = await new Promise((resolve, reject) => {
-                        chrome.storage.local.get(["qrImageData", "qrImageWidth", "qrImageHeight"], (result) => {
-                            if (chrome.runtime.lastError) {
-                                reject(chrome.runtime.lastError)
-                            } else {
-                                resolve(result)
-                            }
-                        })
-                    })
-                    
-                    if (!qrImageData || !qrImageWidth || ! qrImageHeight) {
-                        setError("No QR image data found.")
-                        return
-                    }    
-                    
-                    const imageData = new ImageData(
-                        new Uint8ClampedArray(qrImageData),
-                        qrImageWidth,
-                        qrImageHeight
-                    )
-                        
-                    const qrURL = jsQR(imageData.data, imageData.width, imageData.height)
-                    if (qrURL) {
-                        setResult(qrURL)
-                    } else {
-                        setError("No QR Code detected.")
-                    }                                           
-                } catch (error) {
-                    setError("Error processing QR Code.")
-                    console.error(error)
+            const img = new Image()
+            img.src = response.image
+            
+            img.onload = () => {
+                const canvas = document.createElement("canvas")
+                const ctx = canvas.getContext("2d", { alpha: false })
+
+                canvas.width = img.width
+                canvas.height = img.height
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+
+                const qrCode = jsQR(imageData.data, imageData.width, imageData.height)
+
+                if (qrCode) {
+                    setResult(qrCode.data)
+                } else {
+                    setResult("No QR Code found.")
                 }
+
             }
-        }
-
-        chrome.runtime.onMessage.addListener(handleMessage)
-        return () => chrome.runtime.onMessage.removeListener(handleMessage)
-    }, [])
-
-    const decodeQRCode = (imageData) => {
-        const url = jsQR(imageData.data, imageData.width, imageData.height)
-        return url ? url.data : null
-    }    
+        })
+    }
 
     return (
         <div className="w-[300px] p-4 flex flex-col items-center gap-4">
@@ -73,7 +49,7 @@ function Popup() {
                 <ScanQrCode className="w-5 h-5"/> 
                 <span className="text-md">Scan QR Code</span>
             </Button>
-            <p>URL: {result}</p>
+            <p>URL: {result}-{error}</p>
         </div>
     )
 }

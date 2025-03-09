@@ -1,7 +1,15 @@
 import { Button } from "@/components/ui/button"
+import { 
+    Card,
+    CardHeader,
+    CardTitle,
+    CardDescription,
+    CardContent,
+    CardFooter 
+} from "@/components/ui/card"
 import { ScanQrCode } from "lucide-react"
+import '@mariusbongarts/previewbox/dist/link/index';
 import { useState } from "react"
-import { useEffect } from "react"
 import jsQR from "jsqr"
 import '../index.css'
 
@@ -43,13 +51,37 @@ function Popup() {
     }
 
     return (
-        <div className="w-[300px] p-4 flex flex-col items-center gap-4">
-            <h1 className="text-center font-semibold">Web QR Scanner</h1>
-            <Button onClick={handleClick} className="w-full font-semibold"> 
-                <ScanQrCode className="w-5 h-5"/> 
-                <span className="text-md">Scan QR Code</span>
-            </Button>
-            <p>URL: {result}-{error}</p>
+        <div className="flex flex-col items-center justify-center p-4">
+            <Card className="w-full max-w-md shadow-md">
+                <CardHeader>
+                    <CardTitle>Web QR Scanner</CardTitle>
+                    <CardDescription>Make sure QR code is visible on active tab!</CardDescription>
+                </CardHeader>
+                <CardContent> 
+                    {!result ? (
+                        <div>
+                            <p></p>
+                        </div>
+                    ) : (
+                        <div className="w-full">
+                            <previewbox-link 
+                                href={result}
+                                style={{ 
+                                    display: "block", 
+                                    width: "300px", 
+                                    maxWidth: "100%", 
+                                    overflow: "hidden" 
+                                }}
+                            ></previewbox-link>
+                        </div>
+                    )}
+                </CardContent>
+                <CardFooter>
+                    <Button onClick={handleClick}>
+                        <ScanQrCode className="w-5 h-5"/> 
+                    </Button>
+                </CardFooter>
+            </Card>
         </div>
     )
 }

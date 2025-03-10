@@ -7,10 +7,10 @@
         "default_popup": "index.html",
         "default_icon": "scan-qr-code.svg"
     },
-    "permissions": ["tabs","activeTab", "storage", "scripting"],
+    "permissions": ["tabs"],
     "background": {
         "service_worker": "background.js",
         "type": "module"
     },
-    "host_permissions": ["<all_urls>"]
+    "host_permissions": ["<all_urls>"] 
 }

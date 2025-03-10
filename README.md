@@ -26,22 +26,25 @@ Make sure you have the following installed:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/qr-scanner-extension.git
-   cd qr-scanner-extension
+   git clone https://github.com/EzekielSuresh/Web-QR-Scanner
+   cd Web-QR-Scanner
    ```
+
 2. Install dependencies:
    ```sh
    npm install
    ```
+
 3. Build the project:
    ```sh
    npm run build
    ```
+
 4. Load the extension in Chrome:
    - Open `chrome://extensions/`
-   - Enable **Developer Mode** (top-right corner)
+   - Enable **Developer Mode** 
    - Click **Load unpacked**
-   - Select the `dist/` folder (after build)
+   - Select the `dist/` folder 
 
 ## Usage
 
@@ -51,9 +54,9 @@ Make sure you have the following installed:
 
 ## Roadmap
 
-- [] Improve UI for preview box
-- [] Add support for multiple QR Code scanning
-- [] Add copy button for scanned QR Code URL
+- [ ] Improve UI for preview box
+- [ ] Add support for multiple QR Code scanning
+- [ ] Add copy button for scanned QR Code URL
 
 
 

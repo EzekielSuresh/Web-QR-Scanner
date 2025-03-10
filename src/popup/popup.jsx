@@ -7,7 +7,13 @@ import {
     CardContent,
     CardFooter 
 } from "@/components/ui/card"
+import { 
+    Alert,
+    AlertDescription,
+    AlertTitle
+ } from "@/components/ui/alert";
 import { ScanQrCode } from "lucide-react"
+import { CircleAlert } from "lucide-react";
 import '@mariusbongarts/previewbox/dist/link/index';
 import { useState } from "react"
 import jsQR from "jsqr"
@@ -43,7 +49,7 @@ function Popup() {
                 if (qrCode) {
                     setResult(qrCode.data)
                 } else {
-                    setResult("No QR Code found.")
+                    setError("No QR Code found.")
                 }
 
             }
@@ -60,7 +66,10 @@ function Popup() {
                 <CardContent> 
                     {!result ? (
                         <div>
-                            <p></p>
+                            <Alert variant="destructive">
+                                <CircleAlert className="h-4 w-4"/>
+                                <AlertTitle>{error}</AlertTitle>
+                            </Alert>
                         </div>
                     ) : (
                         <div className="w-full">
@@ -69,17 +78,19 @@ function Popup() {
                                 style={{ 
                                     display: "block", 
                                     width: "300px", 
-                                    maxWidth: "100%", 
-                                    overflow: "hidden" 
+                                    maxWidth: "100%" 
                                 }}
+                                light
                             ></previewbox-link>
                         </div>
                     )}
                 </CardContent>
                 <CardFooter>
-                    <Button onClick={handleClick}>
-                        <ScanQrCode className="w-5 h-5"/> 
-                    </Button>
+                    <div className="flex justify-end w-full">
+                        <Button onClick={handleClick}>
+                            <ScanQrCode className="w-5 h-5"/> 
+                        </Button>
+                    </div>                    
                 </CardFooter>
             </Card>
         </div>

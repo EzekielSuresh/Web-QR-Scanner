@@ -60,17 +60,18 @@ function Popup() {
         <div className="flex flex-col items-center justify-center p-4">
             <Card className="w-full max-w-md shadow-md">
                 <CardHeader>
-                    <CardTitle>Web QR Scanner</CardTitle>
+                    <CardTitle className="text-lg">Web QR Scanner</CardTitle>
                     <CardDescription>Make sure QR code is visible on active tab!</CardDescription>
                 </CardHeader>
                 <CardContent> 
+                    {error && 
+                    <Alert variant="destructive">
+                        <CircleAlert className="h-4 w-4"/>
+                        <AlertTitle>{error}</AlertTitle>
+                    </Alert>}
+
                     {!result ? (
-                        <div>
-                            <Alert variant="destructive">
-                                <CircleAlert className="h-4 w-4"/>
-                                <AlertTitle>{error}</AlertTitle>
-                            </Alert>
-                        </div>
+                        <div></div>
                     ) : (
                         <div className="w-full">
                             <previewbox-link 
@@ -87,7 +88,7 @@ function Popup() {
                 </CardContent>
                 <CardFooter>
                     <div className="flex justify-end w-full">
-                        <Button onClick={handleClick}>
+                        <Button onClick={handleClick} className="w-[75px]">
                             <ScanQrCode className="w-5 h-5"/> 
                         </Button>
                     </div>                    

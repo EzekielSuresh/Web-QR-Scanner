@@ -13,7 +13,6 @@
     "@mariusbongarts/previewbox": "^0.0.24",
     "@radix-ui/react-slot": "^1.1.2",
     "@tailwindcss/vite": "^4.0.8",
-    "@techstark/opencv-js": "^4.10.0-release.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "jsqr": "^1.4.0",

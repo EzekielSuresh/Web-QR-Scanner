@@ -13,14 +13,15 @@
     "@mariusbongarts/previewbox": "^0.0.24",
     "@radix-ui/react-slot": "^1.1.2",
     "@tailwindcss/vite": "^4.0.8",
-    "@zxing/browser": "^0.1.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vite-plugin-wasm": "^3.4.1",
+    "zxing-wasm": "^2.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
@@ -38,6 +39,7 @@
     "globals": "^15.15.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.8",
-    "vite": "^6.1.0"
+    "vite": "^6.1.0",
+    "vite-plugin-top-level-await": "^1.5.0"
   }
 }

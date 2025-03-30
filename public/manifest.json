@@ -12,5 +12,14 @@
         "service_worker": "background.js",
         "type": "module"
     },
-    "host_permissions": ["<all_urls>"] 
+    "host_permissions": ["<all_urls>"],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+    },
+    "web_accessible_resources": [
+        {
+        "resources": ["node_modules/zxing-wasm/dist/reader/zxing_reader.wasm"],
+        "matches": ["<all_urls>"]
+        }
+  ]
 }

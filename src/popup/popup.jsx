@@ -52,53 +52,17 @@ function Popup() {
 
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
 
-            // let qrCodeList = []
-            // let tries = 0
-            // const maxTries = 5
-
-            // const { BrowserMultiFormatReader } = await import('@zxing/browser')
-            // const codeReader = new BrowserMultiFormatReader()
-
-            // while ( tries < maxTries ) {
-
-            //     let qrCode = ""
-
-            //     try {
-            //         qrCode = await codeReader.decodeFromCanvas(canvas)
-            //     } catch (error) {
-            //         break
-            //     }
-
-            //     qrCodeList.push(qrCode.text)
-
-            //     let topLeftCorner = qrCode.resultPoints[0]
-            //     let topRightCorner = qrCode.resultPoints[1]
-            //     let bottomRightCorner = qrCode.resultPoints[2]
-            //     let width = Math.abs(topRightCorner.x - topLeftCorner.x)
-            //     let height = Math.abs(topRightCorner.y - bottomRightCorner.y)
-            //     await maskQRCode(ctx, img, canvas.width, canvas.height, topLeftCorner.x, topLeftCorner.y, width, height)
-
-            //     tries++
-            // }
-
             const results = await scanImage(imageData)
             const qrCodeList = results.map(item => {
-                let text = item.text;
-            
-                // Remove 'chrome-extension://' if mistakenly added
-                if (text.includes("chrome-extension://")) {
-                    text = text.replace(/^chrome-extension:\/\/[a-zA-Z0-9_-]+\//, ""); 
+                let url = item.text.trim();
+    
+                // Check if it already has a protocol
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "http://" + url;
                 }
             
-                return text;
+                return url;
             })
-            
-            // try {
-            //     const results = await readBarcodes(imageData, readerOptions);
-            //     setResult(results)
-            // } catch (error) {
-            //     setError("No QR Code found.")
-            // }
 
             if (qrCodeList.length > 0) {
                 setResult(qrCodeList)
@@ -108,26 +72,6 @@ function Popup() {
                 
 
         })
-    }
-
-    async function maskQRCode(ctx, img, width, height, x, y, maskWidth, maskHeight) {
-        const padding = 10
-        masks.current.push({
-            x: x - padding, 
-            y: y - padding, 
-            maskWidth: maskWidth + 2 * padding, 
-            maskHeight: maskHeight + 2 * padding
-        })
-
-        ctx.clearRect(0, 0, width, height)
-    
-        ctx.drawImage(img, 0, 0, width, height)
-    
-        ctx.fillStyle = "white";
-        masks.current.forEach(mask => {
-            ctx.fillRect(mask.x, mask.y, mask.maskWidth, mask.maskHeight);
-        })
-
     }
 
     async function scanImage(imageData) {
@@ -149,19 +93,6 @@ function Popup() {
           return []
         }
     }
-
-    // async function setupZXing() {
-    //     const ZXing = await import("zxing-wasm/reader");
-
-    //     const reader = new ZXing.MultiFormatReader();
-    
-    //     reader.setHints(new Map([
-    //         [ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.QR_CODE]],
-    //         [ZXing.DecodeHintType.TRY_HARDER, true]
-    //     ]));
-    
-    //     return reader;
-    // }
 
     return (
         <div className="flex flex-col items-center justify-center p-4">

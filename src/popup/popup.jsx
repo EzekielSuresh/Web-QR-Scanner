@@ -36,40 +36,42 @@ function Popup() {
 
             setCapturedImage(response.image)
 
-            const img = new Image()
-            img.src = response.image
-            await img.decode()
-
-            let canvas = document.createElement("canvas")
-            const ctx = canvas.getContext("2d", { alpha: false, willReadFrequently: true })
-
-            canvas.width = img.width
-            canvas.height = img.height
-            ctx.imageSmoothingEnabled = false
-
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-
-            const results = await scanImage(imageData)
-            const qrCodeList = results.map(item => {
-                let url = item.text.trim();
+            try {
+                const img = new Image()
+                img.src = response.image
+                await img.decode()
     
-                // Check if it already has a protocol
-                if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                    url = "http://" + url;
-                }
-            
-                return url;
-            })
-
-            if (qrCodeList.length > 0) {
-                setResult(qrCodeList)
-            } else {
-                setError("No QR Code found.")
-            }            
+                let canvas = document.createElement("canvas")
+                const ctx = canvas.getContext("2d", { alpha: false, willReadFrequently: true })
+    
+                canvas.width = img.width
+                canvas.height = img.height
+                ctx.imageSmoothingEnabled = false
+    
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+    
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+    
+                const results = await scanImage(imageData)
+                const qrCodeList = results.map(item => {
+                    let url = item.text.trim();
+        
+                    // Check if it already has a protocol
+                    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                        url = "http://" + url;
+                    }
                 
-
+                    return url;
+                })
+    
+                if (qrCodeList.length > 0) {
+                    setResult(qrCodeList)
+                } else {
+                    setError("No QR Code found.")
+                }
+            } catch (error) {
+                setError("Error processing image.")
+            }               
         })
     }
 

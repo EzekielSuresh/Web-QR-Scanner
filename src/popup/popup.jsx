@@ -14,6 +14,7 @@ import {
 import { ScanQrCode } from "lucide-react"
 import { CircleAlert } from "lucide-react"
 import '@mariusbongarts/previewbox/dist/link/index'
+import { LinkBox } from "@/components/ui/LinkBox"
 import { useState } from "react"
 import '../index.css'
 
@@ -108,33 +109,19 @@ function Popup() {
                         <CircleAlert className="h-4 w-4"/>
                         <AlertTitle>{error}</AlertTitle>
                     </Alert>}
-                    {capturedImage && (
-                        <div className="mb-4">
-                            <img src={capturedImage} alt="Captured Screen" className="w-full rounded-lg shadow-md"/>
-                        </div>
-                    )}
                     {!result || result.length == 0 ? (
                         <div></div>
                     ) : (
                         <div className="w-full">
                             {result.map((item, index) => (
-                                <previewbox-link 
-                                    key={index}
-                                    href={item}
-                                    style={{ 
-                                        display: "block", 
-                                        width: "300px", 
-                                        maxWidth: "100%" 
-                                    }}
-                                    light
-                                ></previewbox-link>
+                                <LinkBox key={index} url={item} />
                             ))}  
                         </div>
                     )}
                 </CardContent>
                 <CardFooter>
                     <div className="flex justify-end w-full">
-                        <Button onClick={handleClick} className="w-[75px]">
+                        <Button onClick={handleClick} className="w-[80px] bg-gray-800">
                             <ScanQrCode className="w-5 h-5"/> 
                         </Button>
                     </div>                    

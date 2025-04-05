@@ -13,7 +13,6 @@ import {
  } from "@/components/ui/alert";
 import { ScanQrCode } from "lucide-react"
 import { CircleAlert } from "lucide-react"
-import '@mariusbongarts/previewbox/dist/link/index'
 import { LinkBox } from "@/components/ui/LinkBox"
 import { useState } from "react"
 import '../index.css'

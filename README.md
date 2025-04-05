@@ -55,8 +55,8 @@ Make sure you have the following installed:
 ## Roadmap
 
 - [ ] Improve UI for preview box
-- [/] Add support for multiple QR Code scanning
-- [/] Add copy button for scanned QR Code URL
+- [X] Add support for multiple QR Code scanning
+- [X] Add copy button for scanned QR Code URL
 
 
 

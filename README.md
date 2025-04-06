@@ -1,5 +1,7 @@
 # Web QR Scanner
 
+![Extension Preview](public/extension_snapshot.png)
+
 A simple chrome extension that allows users to scan visble QR Codes directly from web pages.
 
 ### Features:

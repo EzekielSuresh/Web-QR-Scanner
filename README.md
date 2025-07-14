@@ -56,7 +56,7 @@ Make sure you have the following installed:
 
 ## Roadmap
 
-- [ ] Add tags to indicate locations for multiple QR Code
+- [ ] Add 'copy all' and 'open all' button for captured URLs
 - [ ] Improve UI for preview box
 - [X] Add support for multiple QR Code scanning
 - [X] Add copy button for scanned QR Code URL

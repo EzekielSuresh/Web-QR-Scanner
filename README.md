@@ -18,6 +18,9 @@ A simple chrome extension that allows users to scan visble QR Codes directly fro
 
 ## Getting Started
 
+> [!NOTE]
+> If you have previously cloned this repository, please run `git pull` to make sure you have the latest updates.
+
 ### Prerequisites
 
 Make sure you have the following installed:
@@ -25,9 +28,6 @@ Make sure you have the following installed:
 * ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
 ### Installation
-
-> [!NOTE]
-> If you have previously cloned this repository, please run `git pull` to make sure you have the latest updates.
 
 1. Clone the repository:
    ```sh

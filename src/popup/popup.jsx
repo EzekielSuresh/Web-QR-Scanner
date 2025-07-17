@@ -14,6 +14,7 @@ import {
 import { ScanQrCode } from "lucide-react"
 import { CircleAlert } from "lucide-react"
 import { LinkBox } from "@/components/ui/LinkBox"
+import { BatchAction } from "@/components/ui/BatchAction";
 import { useState } from "react"
 import '../index.css'
 
@@ -96,8 +97,8 @@ function Popup() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center p-4">
-            <Card className="w-full max-w-md shadow-md">
+        <div className="flex flex-col items-center justify-center p-2">
+            <Card className="w-md shadow-none border-none">
                 <CardHeader>
                     <CardTitle className="text-lg">Web QR Scanner</CardTitle>
                     <CardDescription>Make sure QR code is visible on active tab!</CardDescription>
@@ -114,14 +115,17 @@ function Popup() {
                         <div className="w-full">
                             {result.map((item, index) => (
                                 <LinkBox key={index} url={item} />
-                            ))}  
+                            ))}
+                            {result.length > 1 && 
+                            <BatchAction urls={result} />
+                            }  
                         </div>
                     )}
                 </CardContent>
                 <CardFooter>
                     <div className="flex justify-end w-full">
-                        <Button onClick={handleClick} className="w-[80px] bg-gray-800">
-                            <ScanQrCode className="w-5 h-5"/> 
+                        <Button onClick={handleClick} className="w-[80px] bg-gray-800 mt-2">
+                            <ScanQrCode className="w-5 h-5"/>
                         </Button>
                     </div>                    
                 </CardFooter>

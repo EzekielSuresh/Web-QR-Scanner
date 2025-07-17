@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Web QR Scanner",
-    "version": "1.0",
+    "version": "1.2.0",
     "description": "A functional scanner for QR Codes scattered across the Web.",
     "action": {
         "default_popup": "index.html",

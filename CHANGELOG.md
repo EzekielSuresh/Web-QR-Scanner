@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.2.0
+
+### Added or Changed
+- Minor UI update
+- Added batch action 'Copy URLs' to copy all scanned urls
+- Added batch action 'Open URLs' to open all scanned urls in background tabs
+
 ## v1.1.1
 
 ### Added or Changed

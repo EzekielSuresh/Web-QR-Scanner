@@ -26,6 +26,9 @@ Make sure you have the following installed:
 
 ### Installation
 
+> [!NOTE]
+> If you have previously cloned this repository, please run `git pull` to make sure you have the latest updates.
+
 1. Clone the repository:
    ```sh
    git clone https://github.com/EzekielSuresh/Web-QR-Scanner
@@ -56,8 +59,7 @@ Make sure you have the following installed:
 
 ## Roadmap
 
-- [ ] Add 'copy all' and 'open all' button for captured URLs
-- [ ] Improve UI for preview box
+- [X] Add 'copy all' and 'open all' button for captured URLs
 - [X] Add support for multiple QR Code scanning
 - [X] Add copy button for scanned QR Code URL
 
